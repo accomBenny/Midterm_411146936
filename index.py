@@ -64,6 +64,27 @@ def overview_student():
 botton_overview = tk.Button(root, text='Overview', command=overview_student)
 botton_overview.pack(pady=25)
 
+# ------------------------------------------------------------------
+# 新增功能：刪除 (Delete) 學生資料
+# ------------------------------------------------------------------
+def delete_student():
+    student_id = entry_id.get()
+    
+    # 執行 SQL DELETE 語句，根據 db_student_id 欄位刪除資料
+    cursor.execute('DELETE FROM DB_student WHERE db_student_id = ?', (student_id,))
+    conn.commit()
+    
+    # 簡單的控制台輸出回饋
+    print(f'已嘗試從資料庫中刪除 ID 為: {student_id} 的資料')
+    print('-' * 30)
+
+# 新增 button_delete 按鈕，並綁定 delete_student 函式
+button_delete = tk.Button(root, text='Delete', command=delete_student)
+# 將其放在 Overview 按鈕之下
+button_delete.pack(pady=10) 
+# ------------------------------------------------------------------
+
+
 print ('hello software')
 
 root.mainloop() #must be put to the end of programming code
